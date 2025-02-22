@@ -19,6 +19,7 @@ task master/
 ├── configs/                # Configuration files
 │   ├── appconfig.py       # Application configuration
 │   └── dbconfig.py        # Database configuration
+|   └── middleware.py      # Middleware for authentication
 ├── models/                 # Database models
 │   └── TodoListModel.py   # Todo list model definition
 ├── rest/                   # REST API endpoints
@@ -79,6 +80,13 @@ SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///notebook.db'
 ```
 
 You can override this by setting the `DATABASE_URL` environment variable.
+
+## Middleware Authentication
+
+The application includes a middleware component located in configs/middleware.py. This middleware is responsible for:
+
+- Enforcing basic authentication before accessing the application.
+- Prompting users to enter a username and password when they access the web interface.
 
 ## Usage
 
