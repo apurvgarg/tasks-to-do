@@ -1,7 +1,7 @@
-from flask import Flask, redirect, render_template
+from flask import Flask,render_template
 from rest.firstblueprint import service_routes
 from models.TodoListModel import TodoList 
-from configs import appconfig, dbconfig
+from configs import appconfig, dbconfig, middleware
 
 app = Flask(__name__)
 app.config.from_object(appconfig.Config)
@@ -13,6 +13,8 @@ with app.app_context():
     dbconfig.db.create_all()
 
 app.register_blueprint(service_routes)
+
+app.wsgi_app = middleware.Middleware(app.wsgi_app)
 
 # Route for displaying the tasks
 @app.route('/', methods=['GET'])
